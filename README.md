@@ -8,7 +8,7 @@ Cerberus and validator-collection based custom validator package (garlic_validat
 * Cerberus schema validation - [https://pypi.org/project/Cerberus](https://pypi.org/project/Cerberus)
 * Pydantic validation - [https://pypi.org/project/pydantic](https://pypi.org/project/pydantic)
 * Custom validator module
-* is_empty, is_numpy, is_float, is_truthy, is_falsy, is_bool, is_attr_empty
+* is_empty, is_numpy, is_tensor, is_float, is_truthy, is_falsy, is_bool, is_attr_empty
 
 ---
 

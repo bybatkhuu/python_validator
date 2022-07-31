@@ -5,6 +5,8 @@ import logging
 from pydantic import validate_arguments
 from validator_collection import validators, checkers, errors
 
+from .__version__ import __version__
+
 logger = logging.getLogger(__name__)
 
 
@@ -30,12 +32,17 @@ def is_empty(value, trim_str: bool=False):
 
         if value == '':
             return True
+
     elif isinstance(value, list) or isinstance(value, dict) or isinstance(value, tuple) or isinstance(value, range) or isinstance(value, set):
         if len(value) == 0:
             return True
 
     if is_numpy(value):
         if value.size == 0:
+            return True
+
+    if is_tensor(value):
+        if value.nelement() == 0:
             return True
 
     return False
@@ -53,6 +60,23 @@ def is_numpy(value):
     """
 
     if f"{type(value).__module__}.{type(value).__name__}" == 'numpy.ndarray':
+        return True
+
+    return False
+
+
+@validate_arguments
+def is_tensor(value):
+    """Check 'value' is torch.Tensor or not.
+
+    Args:
+        value (any, required): The value to check.
+
+    Returns:
+        bool: True if 'value' is valid, False if it is not.
+    """
+
+    if f"{type(value).__module__}.{type(value).__name__}" == 'torch.Tensor':
         return True
 
     return False
@@ -191,6 +215,7 @@ def is_attr_empty(obj: object, attr_name: str):
 
 checkers.is_empty = is_empty
 checkers.is_numpy = is_numpy
+checkers.is_tensor = is_tensor
 checkers.is_float = is_float
 checkers.is_truthy = is_truthy
 checkers.is_falsy = is_falsy

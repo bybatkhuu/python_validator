@@ -1,1 +1,1 @@
-garlic-validator==1.0.0
+garlic-validator==1.0.1
