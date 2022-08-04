@@ -70,7 +70,8 @@ cat installed_files.txt | xargs rm -vrf
 **garlic-validator** and **validator-collection**:
 
 ```python
-import numpy as np
+# import torch
+# import numpy as np
 from garlic_validator import validators, checkers, errors
 
 try:
@@ -143,15 +144,26 @@ is_empty = checkers.is_empty(np.array([]))
 # True
 
 
-## is_numpy(val)
-is_numpy = checkers.is_numpy(np.array([]))
-# True
+# ## is_numpy(val)
+# is_numpy = checkers.is_numpy(np.array([]))
+# # True
 
-is_numpy = checkers.is_numpy(np.array([1, 2, 3]))
-# True
+# is_numpy = checkers.is_numpy(np.array([1, 2, 3]))
+# # True
 
-is_numpy = checkers.is_numpy(None)
-# False
+# is_numpy = checkers.is_numpy(None)
+# # False
+
+
+# ## is_numpy(val)
+# is_numpy = checkers.is_tensor(torch.empty(2, 3))
+# # True
+
+# is_numpy = checkers.is_tensor(torch.Tensor([1, 2, 3]))
+# # True
+
+# is_numpy = checkers.is_tensor(None)
+# # False
 
 
 ## is_float(val)
